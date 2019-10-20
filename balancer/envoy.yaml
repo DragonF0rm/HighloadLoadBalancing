@@ -2,7 +2,6 @@ admin:
   access_log_path: /var/log/envoy/admin_access.log
   address:
     socket_address: { address: 0.0.0.0, port_value: 9901 }
-  #TODO add metrics
 static_resources:
   listeners:
     - name: http_listener
@@ -36,7 +35,7 @@ static_resources:
     - name: backend_service
       connect_timeout: 0.25s
       type: STATIC
-      lb_policy: ROUND_ROBIN
+      lb_policy: ROUND_ROBIN #TODO customize???
       load_assignment:
         cluster_name: backend_service
         endpoints:
@@ -66,3 +65,12 @@ static_resources:
             healthy_threshold: 1
             always_log_health_check_failures: true
             event_log_path: /var/log/envoy/health_check.log
+stats_sinks:
+  - name: "envoy.statsd"
+    config:
+      address:
+        socket_address:
+          address: 0.0.0.0
+          port_value: 9102
+      tcp_cluster_name: "backend_service"
+      prefix: load_balancer
