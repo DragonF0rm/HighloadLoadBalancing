@@ -8,3 +8,9 @@ scrape_configs:
       - targets: ['165.22.72.160:9901']
         labels:
           group: 'load_balancers'
+      - targets:
+        - '68.183.72.187:9901'
+        - '178.128.192.170:9901'
+        - '142.93.98.176:9901'
+        labels:
+          group: 'backends'
