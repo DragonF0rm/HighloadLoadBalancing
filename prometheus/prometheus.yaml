@@ -1,9 +1,9 @@
 global:
-  scrape_interval:  15s
+  scrape_interval: 15s
 scrape_configs:
   - job_name: 'statsd'
     scrape_interval: 5s
     static_configs:
-      - targets: ['0.0.0.0:9102']
+      - targets: ['165.22.72.160:9102']
         labels:
-          group: 'services'
+          group: 'load_balancers'

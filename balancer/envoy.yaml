@@ -67,6 +67,7 @@ static_resources:
             event_log_path: /var/log/envoy/health_check.log
 stats_sinks:
   - name: "envoy.statsd"
-    config:
+    typed_config:
+      "@type": type.googleapis.com/envoy.config.metrics.v2.StatsdSink
       tcp_cluster_name: "backend_service"
       prefix: load_balancer
