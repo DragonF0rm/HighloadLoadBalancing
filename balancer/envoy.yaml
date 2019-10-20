@@ -1,0 +1,49 @@
+admin:
+  access_log_path: /var/log/envoy/admin_access.log
+  address:
+    socket_address: { address: 127.0.0.1, port_value: 9901 }
+  #TODO add cluster status lookup
+  #TODO add metrics
+static_resources:
+  listeners:
+    - name: http_listener
+      address:
+        socket_address: { address: 127.0.0.1, port_value: 80 }
+      filter_chains: #TODO Network filters vs Listener filters
+        - filters:
+            - name: envoy.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.config.filter.network.http_connection_manager.v2.HttpConnectionManager
+                stat_prefix: ingress_http
+                codec_type: AUTO #Can be also HTTP1 or HTTP2
+                route_config:
+                  name: request_route
+                  virtual_hosts:
+                    - name: local_service
+                      domains: ["*"] #Got from incoming request Host header
+                      routes:
+                        - match: { prefix: "/" }
+                          route: { cluster: backend_service }
+                http_filters: #Можно фильтровать по корсам, делать авторизацию и т.п. https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/http_filters#config-http-filters
+                  - name: envoy.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.config.filter.http.router.v2.Router
+                      name: envoy.file_access_log
+                      typed_config:
+                        "@type": type.googleapis.com/envoy.config.accesslog.v2.FileAccessLog
+                        path: /var/log/envoy/access.log
+  clusters:
+    - name: backend_service
+      connect_timeout: 0.25s
+      type: STATIC
+      lb_policy: ROUND_ROBIN
+      load_assignment:
+        cluster_name: backend_service
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address:
+                      #TODO set backend servers
+                      address: 127.0.0.1
+                      port_value: 8000
