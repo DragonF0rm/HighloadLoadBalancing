@@ -59,7 +59,6 @@ static_resources:
       health_checks:
           - http_health_check:
               path: /api/liveness-probe
-              service_name: backend_service
             timeout: 1s
             interval: 30s
             unhealthy_interval: 10s
