@@ -1,0 +1,5 @@
+port: 8000
+req_max_time: 800
+req_min_time: 300
+max_connections: 10000
+fake_conn_batch: 1000
