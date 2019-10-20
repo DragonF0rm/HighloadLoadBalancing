@@ -45,6 +45,15 @@ static_resources:
               - endpoint:
                   address:
                     socket_address:
-                      #TODO set backend servers
+                      address: 178.128.199.176
+                      port_value: 8000
+              - endpoint:
+                  address:
+                    socket_address:
+                      address: 178.128.192.170
+                      port_value: 8000
+              - endpoint:
+                  address:
+                    socket_address:
                       address: 142.93.98.176
                       port_value: 8000
