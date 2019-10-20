@@ -7,12 +7,15 @@ GRAFANA_NAME="grafana"
 GRAFANA_PORT=3000
 
 run_backend:
+	@echo "node_id: ${hostname}" > ./backend/etc/data.txt
+	./backend/etc/build_cfg.py > ./backend/etc/envoy.yaml
 	docker-compose -f ./backend/docker-compose.yml up
 
 stop_backend:
 	docker-compose -f ./backend/docker-compose.yml stop
 
 clear_backend:
+	rm ./backend/data.txt
 	docker-compose -f ./backend/docker-compose.yml rm
 
 run_lb:
