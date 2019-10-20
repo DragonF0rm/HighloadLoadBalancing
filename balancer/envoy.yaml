@@ -1,14 +1,14 @@
 admin:
   access_log_path: /var/log/envoy/admin_access.log
   address:
-    socket_address: { address: 127.0.0.1, port_value: 9901 }
+    socket_address: { address: 0.0.0.0, port_value: 9901 }
   #TODO add cluster status lookup
   #TODO add metrics
 static_resources:
   listeners:
     - name: http_listener
       address:
-        socket_address: { address: 127.0.0.1, port_value: 80 }
+        socket_address: { address: 0.0.0.0, port_value: 80 }
       filter_chains: #TODO Network filters vs Listener filters
         - filters:
             - name: envoy.http_connection_manager
@@ -21,6 +21,7 @@ static_resources:
                   virtual_hosts:
                     - name: local_service
                       domains: ["*"] #Got from incoming request Host header
+                      require_tls: NONE
                       routes:
                         - match: { prefix: "/" }
                           route: { cluster: backend_service }
@@ -45,5 +46,5 @@ static_resources:
                   address:
                     socket_address:
                       #TODO set backend servers
-                      address: 127.0.0.1
+                      address: 0.0.0.0
                       port_value: 8000
