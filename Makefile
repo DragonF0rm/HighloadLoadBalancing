@@ -18,7 +18,7 @@ clear_backend:
 
 run_lb:
 	docker build -t $(LOAD_BALANCER_NAME) ./balancer
-	docker run -p $(LOAD_BALANCER_PORT):$(LOAD_BALANCER_PORT) -p 9901:9901 -p 9102:9102 \
+	docker run -p $(LOAD_BALANCER_PORT):$(LOAD_BALANCER_PORT) -p 9901:9901 \
 	-v /var/log/envoy:/var/log/envoy \
 	--name $(LOAD_BALANCER_NAME) $(LOAD_BALANCER_NAME)
 
