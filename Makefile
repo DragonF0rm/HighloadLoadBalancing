@@ -16,7 +16,7 @@ clear_backend:
 
 run_lb:
 	docker build -t $(LOAD_BALANCER_NAME) ./balancer
-	docker run -p $(LOAD_BALANCER_PORT):$(LOAD_BALANCER_PORT) -p 9901:9901 -p 8000:8000 \
+	docker run -p $(LOAD_BALANCER_PORT):$(LOAD_BALANCER_PORT) -p 9901:9901 \
 	--name $(LOAD_BALANCER_NAME) $(LOAD_BALANCER_NAME)
 
 stop_lb:
