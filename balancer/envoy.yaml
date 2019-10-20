@@ -1,3 +1,6 @@
+node:
+  id: LoadBalancer_01
+  cluster: HighloadCluster
 admin:
   access_log_path: /var/log/envoy/admin_access.log
   address:
