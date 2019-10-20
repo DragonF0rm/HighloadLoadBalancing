@@ -64,3 +64,5 @@ static_resources:
             interval: 30s
             unhealthy_interval: 10s
             unhealthy_threshold: 2
+            healthy_threshold: 1
+            always_log_health_check_failures: true
