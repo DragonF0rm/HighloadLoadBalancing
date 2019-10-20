@@ -44,7 +44,6 @@ clear_prometheus:
 
 run_grafana:
 	docker run -p $(GRAFANA_PORT):$(GRAFANA_PORT) \
-	-v grafana:/etc/grafana/provisioning \
 	--name $(GRAFANA_NAME) \
 	grafana/grafana
 
