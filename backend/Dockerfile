@@ -2,7 +2,7 @@ FROM golang:1.12.11-alpine AS build
 LABEL maintainer="Uimin Maksim"
 WORKDIR /backend
 COPY . .
-RUN yes| apk add git
+RUN yes| apk addclear git
 RUN go build -o bin/backend main.go
 
 FROM alpine
