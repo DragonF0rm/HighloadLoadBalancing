@@ -1,3 +1,4 @@
 backend/bin
 backend/etc/data.txt
+backend/etc/envoy.yaml
 .idea
