@@ -4,6 +4,8 @@ BACKEND_NAME="backend"
 BACKEND_PORT=8000
 PROMETHEUS_NAME="prometheus"
 PROMETHEUS_PORT=9090
+GRAFANA_NAME="grafana"
+GRAFANA_PORT=3000
 
 run_backend:
 	docker build -t $(BACKEND_NAME) ./backend
@@ -39,3 +41,15 @@ stop_prometheus:
 clear_prometheus:
 	docker rm $(PROMETHEUS_NAME)
 	docker rmi $(PROMETHEUS_NAME)
+
+run_grafana:
+	docker run -p $(GRAFANA_PORT):$(GRAFANA_PORT) \
+	-v ./grafana:/etc/grafana/provisioning
+	--name $(GRAFANA_NAME) \
+	grafana/grafana
+
+stop_grafana:
+	docker_stop $(GRAFANA_NAME)
+
+clear_grafana:
+	docker rm $(GRAFANA_NAME)

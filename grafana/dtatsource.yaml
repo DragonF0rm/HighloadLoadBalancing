@@ -1,0 +1,9 @@
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy #maybe change to direct???
+    orgId: 1
+    url: 0.0.0.0:9090
+    isDefault: true
+    version: 1
+    editable: true
