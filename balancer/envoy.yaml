@@ -63,3 +63,4 @@ static_resources:
             timeout: 1s
             interval: 30s
             unhealthy_interval: 10s
+            unhealthy_threshold: 2
