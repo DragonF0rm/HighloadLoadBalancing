@@ -66,3 +66,4 @@ static_resources:
             unhealthy_threshold: 2
             healthy_threshold: 1
             always_log_health_check_failures: true
+            event_log_path: /var/log/envoy/health_check.log
