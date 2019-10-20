@@ -1,6 +1,5 @@
 LOAD_BALANCER_NAME="load_balancer"
 LOAD_BALANCER_PORT=80
-BACKEND_NAME="backend"
 BACKEND_PORT=8000
 PROMETHEUS_NAME="prometheus"
 PROMETHEUS_PORT=9090
@@ -8,15 +7,13 @@ GRAFANA_NAME="grafana"
 GRAFANA_PORT=3000
 
 run_backend:
-	docker build -t $(BACKEND_NAME) ./backend
-	docker run -p $(BACKEND_PORT):$(BACKEND_PORT) --name $(BACKEND_NAME) $(BACKEND_NAME)
+	docker-compose -f ./backend/docker-compose.yml up
 
 stop_backend:
-	docker stop $(BACKEND_NAME)
+	docker-compose -f ./backend/docker-compose.yml stop
 
 clear_backend:
-	docker rm $(BACKEND_NAME)
-	docker rmi $(BACKEND_NAME)
+	docker-compose -f ./backend/docker-compose.yml rm
 
 run_lb:
 	docker build -t $(LOAD_BALANCER_NAME) ./balancer
