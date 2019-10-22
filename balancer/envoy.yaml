@@ -68,8 +68,3 @@ static_resources:
             healthy_threshold: 1
             always_log_health_check_failures: true
             event_log_path: /var/log/envoy/health_check.log
-stats_sinks:
-  - name: envoy.statsd
-    config:
-      tcp_cluster_name: backend_service
-      prefix: load_balancer
