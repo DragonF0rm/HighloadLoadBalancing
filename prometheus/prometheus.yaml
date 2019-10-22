@@ -9,7 +9,7 @@ scrape_configs:
         labels:
           group: 'load_balancers'
       - targets:
-        - '178.128.199.176'
+        - '178.128.199.176:9901'
         - '178.128.192.170:9901'
         - '142.93.98.176:9901'
         labels:
