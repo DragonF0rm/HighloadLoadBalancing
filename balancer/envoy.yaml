@@ -47,17 +47,17 @@ static_resources:
                   address:
                     socket_address:
                       address: 178.128.199.176
-                      port_value: 8000
+                      port_value: 10000
               - endpoint:
                   address:
                     socket_address:
                       address: 178.128.192.170
-                      port_value: 8000
+                      port_value: 10000
               - endpoint:
                   address:
                     socket_address:
                       address: 142.93.98.176
-                      port_value: 8000
+                      port_value: 10000
       health_checks:
           - http_health_check:
               path: /api/liveness-probe
@@ -68,4 +68,8 @@ static_resources:
             healthy_threshold: 1
             always_log_health_check_failures: true
             event_log_path: /var/log/envoy/health_check.log
-#TODO автоподкачка метрик с кластера?
+stats_sinks:
+  - name: envoy.statsd
+    config:
+      tcp_cluster_name: backend_service
+      prefix: load_balancer
