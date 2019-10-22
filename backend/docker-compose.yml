@@ -6,6 +6,7 @@ services:
       - "8000:8000"
   envoy:
     image: "envoyproxy/envoy-alpine"
+    network_mode: host
     ports:
       - "9901:9901"
       - "10000:10000"
