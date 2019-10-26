@@ -50,6 +50,7 @@ func ExposeMetrics() {
 		}
 	}()
 
+	http.Handle("/stats/prometheus", promhttp.Handler())
 	port := cfg.GetInt("metrics_port")
-	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), promhttp.Handler()))
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), nil))
 }
