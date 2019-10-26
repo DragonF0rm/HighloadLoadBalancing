@@ -18,7 +18,7 @@ func main() {
 	}
 
 	cfg.Init(args[0])
-	metric.ExposeMetrics()
+	go metric.ExposeMetrics()
 
 	port := cfg.GetInt("port")
 	mux := router.GetRouter()

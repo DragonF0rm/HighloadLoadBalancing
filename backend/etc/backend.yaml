@@ -1,4 +1,5 @@
 port: 8000
+metrics_port: 8010
 req_max_time: 800
 req_min_time: 300
 max_connections: 10000

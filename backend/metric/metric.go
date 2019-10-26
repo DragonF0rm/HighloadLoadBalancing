@@ -1,20 +1,20 @@
 package metric
 
 import (
+	"LoadBalancingBackend/cfg"
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/prometheus/common/log"
 	"io/ioutil"
+	"net/http"
 	"strconv"
 	"strings"
 	"time"
 )
 
-var (
-	cpuUsage prometheus.Gauge
-)
-
 func ExposeMetrics() {
-	cpuUsage = prometheus.NewGauge(
+	cpuUsage := prometheus.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "cpu_usage",
 		})
@@ -50,4 +50,8 @@ func ExposeMetrics() {
 			time.Sleep(1000 * time.Millisecond)
 		}
 	}()
+
+	http.Handle("/stats/prometheus", promhttp.Handler())
+	port := cfg.GetInt("metrics_port")
+	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(port), nil))
 }

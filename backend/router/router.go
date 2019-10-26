@@ -2,14 +2,12 @@ package router
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"net/http"
 )
 
 func GetRouter() *mux.Router {
 	router := mux.NewRouter()
 	router.Use(AccessLogMiddleware)
-	router.Handle("/stats/prometheus", promhttp.Handler()).Methods(http.MethodGet)
 
 	api := router.PathPrefix("/api").Subrouter()
 	api.HandleFunc("/liveness-probe", LivenessProbeHandler).Methods(http.MethodGet)
