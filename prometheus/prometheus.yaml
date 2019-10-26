@@ -15,8 +15,10 @@ scrape_configs:
         labels:
           group: 'backends'
       - targets:
+          - '68.183.72.187:8010'
+          - '165.22.72.160:8010'
           - '178.128.199.176:8010'
           - '178.128.192.170:8010'
           - '142.93.98.176:8010'
         labels:
-          group: 'backend_containers'
+          group: 'metrics'
