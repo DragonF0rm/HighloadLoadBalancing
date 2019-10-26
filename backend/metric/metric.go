@@ -3,9 +3,7 @@ package metric
 import (
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"io/ioutil"
-	"net/http"
 	"strconv"
 	"strings"
 	"time"
@@ -15,7 +13,7 @@ var (
 	cpuUsage prometheus.Gauge
 )
 
-func ExposeMetrics() http.Handler {
+func ExposeMetrics() {
 	cpuUsage = prometheus.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "cpu_usage",
@@ -52,6 +50,4 @@ func ExposeMetrics() http.Handler {
 			time.Sleep(1000 * time.Millisecond)
 		}
 	}()
-
-	return promhttp.Handler()
 }

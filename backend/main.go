@@ -2,6 +2,7 @@ package main
 
 import (
 	"LoadBalancingBackend/cfg"
+	"LoadBalancingBackend/metric"
 	"LoadBalancingBackend/router"
 	"fmt"
 	"log"
@@ -15,7 +16,9 @@ func main() {
 	if len(args) < 0 {
 		log.Fatal("Config not provided")
 	}
+
 	cfg.Init(args[0])
+	metric.ExposeMetrics()
 
 	port := cfg.GetInt("port")
 	mux := router.GetRouter()
