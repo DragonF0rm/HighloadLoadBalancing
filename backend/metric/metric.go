@@ -3,6 +3,7 @@ package metric
 import (
 	"LoadBalancingBackend/cfg"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promauto"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/prometheus/common/log"
 	"net/http"
@@ -11,7 +12,7 @@ import (
 )
 
 func ExposeMetrics() {
-	cpuUsage := prometheus.NewGauge(
+	cpuUsage := promauto.NewGauge(
 		prometheus.GaugeOpts{
 			Name: "cpu_usage",
 		})
