@@ -5,6 +5,14 @@ services:
     mem_limit: 800m
     ports:
       - "8000:8000"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.90'
+          memory: 800M
+        reservations:
+          cpus: '0.70'
+          memory: 500M
   envoy:
     image: "envoyproxy/envoy-alpine"
     network_mode: host
