@@ -18,7 +18,6 @@ func ExposeMetrics() {
 		prometheus.GaugeOpts{
 			Name: "cpu_usage",
 		})
-	prometheus.MustRegister(cpuUsage)
 
 	go func() {
 		for {
