@@ -3,7 +3,6 @@ LABEL maintainer="Uimin Maksim"
 WORKDIR /backend
 COPY . .
 RUN yes| apk add git
-RUN ./etc/build_cfg.py
 RUN go build -o bin/backend main.go
 
 FROM alpine
