@@ -42,7 +42,7 @@ func main() {
 							idle = val
 						}
 					}
-					return
+					break
 				}
 			}
 			cpuUsage.Set((float64(total - idle) / float64(total)) * 100)
