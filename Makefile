@@ -15,7 +15,7 @@ stop_backend:
 	docker-compose -f ./backend/docker-compose.yml stop
 
 clear_backend:
-	rm ./backend/data.txt
+	rm ./backend/data.txt; \
 	docker-compose -f ./backend/docker-compose.yml rm
 
 run_lb:
@@ -28,7 +28,7 @@ stop_lb:
 	docker stop $(LOAD_BALANCER_NAME)
 
 clear_lb:
-	docker rm $(LOAD_BALANCER_NAME)
+	docker rm $(LOAD_BALANCER_NAME); \
 	docker rmi $(LOAD_BALANCER_NAME)
 
 run_prometheus:
@@ -39,7 +39,7 @@ stop_prometheus:
 	docker stop $(PROMETHEUS_NAME)
 
 clear_prometheus:
-	docker rm $(PROMETHEUS_NAME)
+	docker rm $(PROMETHEUS_NAME); \
 	docker rmi $(PROMETHEUS_NAME)
 
 run_grafana:
