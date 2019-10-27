@@ -29,9 +29,13 @@ func RequestHandler(w http.ResponseWriter, r *http.Request) {
 	reqMinTime := cfg.GetInt("req_min_time")
 	sleepMillisCount := int(float32(rand.Intn(reqMaxTime - reqMinTime) + reqMinTime) * loadCoefficient)
 	sleepDuration := time.Duration(sleepMillisCount) * time.Millisecond
-
 	time.Sleep(sleepDuration)
+
 	w.WriteHeader(responseStatus)
+	msg := "Hello world"
+	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Content-Length", strconv.Itoa(len(msg)))
+	w.Write([]byte(msg))
 }
 
 func OverloadHandler(w http.ResponseWriter, r *http.Request) {
