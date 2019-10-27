@@ -16,7 +16,7 @@ stop_backend:
 
 clear_backend:
 	rm ./backend/data.txt; \
-	docker-compose -f ./backend/docker-compose.yml rm
+	yes| docker-compose -f ./backend/docker-compose.yml rm
 
 run_lb:
 	docker build -t $(LOAD_BALANCER_NAME) ./balancer
