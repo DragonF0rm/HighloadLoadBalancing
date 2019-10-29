@@ -41,11 +41,10 @@ static_resources:
       lb_policy: ROUND_ROBIN #TODO customize???
       lb_subset_config:
         fallback_policy: ANY_ENDPOINT
-      upstream_connection_option:
-        tcp_keepalive:
-          keepalive_probes: 3
-          keepalive_time: 3s
-          keepalive_interval: 1s
+      outlier_detection:
+        consecutive_5xx: 3
+        interval: 10s
+
       load_assignment:
         cluster_name: backend_service
         endpoints:
