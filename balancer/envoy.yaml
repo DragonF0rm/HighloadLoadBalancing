@@ -39,6 +39,13 @@ static_resources:
       connect_timeout: 0.25s
       type: STATIC
       lb_policy: ROUND_ROBIN #TODO customize???
+      lb_subset_config:
+        fallback_policy: ANY_ENDPOINT
+      upstream_connection_option:
+        tcp_keepalive:
+          keepalive_probes: 3
+          keepalive_time: 3s
+          keepalive_interval: 1s
       load_assignment:
         cluster_name: backend_service
         endpoints:
