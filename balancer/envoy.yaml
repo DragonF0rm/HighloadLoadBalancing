@@ -25,11 +25,17 @@ static_resources:
                       require_tls: NONE
                       routes:
                         - match: { prefix: "/" }
-                          route: { cluster: backend_service }
-                      retry_policy:
-                        retry_on: "5xx"
-                        num_retries: 3
-                        per_try_timeout_ms: 2000
+                          route:
+                            cluster: backend_service
+                            retry_policy:
+                              retry_on: "retriable_status_codes"
+                              retriable_status_codes:
+                                - 500 #Internal server error
+                                - 502 #Bad Gateway
+                                - 504 #Gateway timeout
+                                - 507 #Insufficient Storage
+                              num_retries: 3
+                              per_try_timeout_ms: 2000
                 http_filters: #Можно фильтровать по корсам, делать авторизацию и т.п. https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/http_filters#config-http-filters
                   - name: envoy.router
                     typed_config:
