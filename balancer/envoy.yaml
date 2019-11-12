@@ -32,6 +32,7 @@ static_resources:
                               retriable_status_codes:
                                 - 500 #Internal server error
                                 - 502 #Bad Gateway
+                                - 503 #Server too busy
                                 - 504 #Gateway timeout
                                 - 507 #Insufficient Storage
                               num_retries: 3
