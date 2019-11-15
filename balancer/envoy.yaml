@@ -46,7 +46,9 @@ static_resources:
       type: STATIC
       lb_policy: ROUND_ROBIN #TODO customize???
       lb_subset_config:
-        fallback_policy: ANY_ENDPOINT
+        fallback_policy: DEFAULT_SUBSET
+        default_subset:
+          stage: prod
       outlier_detection:
         consecutive_5xx: 1
         interval: 10s
@@ -59,17 +61,31 @@ static_resources:
                     socket_address:
                       address: 178.128.199.176
                       port_value: 10000
+                metadata:
+                  filter_metadata:
+                    envoy.lb:
+                      version: '1.0'
+                      stage: 'prod'
               - endpoint:
                   address:
                     socket_address:
                       address: 178.128.192.170
                       port_value: 10000
+                metadata:
+                  filter_metadata:
+                    envoy.lb:
+                      version: '1.0'
+                      stage: 'prod'
               - endpoint:
                   address:
                     socket_address:
                       address: 142.93.98.176
                       port_value: 10000
-        policy:
+                metadata:
+                  filter_metadata:
+                    envoy.lb:
+                      version: '1.0'
+                      stage: 'prod'
 
       health_checks:
           - http_health_check:
