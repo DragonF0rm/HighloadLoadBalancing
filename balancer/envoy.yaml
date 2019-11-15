@@ -28,10 +28,10 @@ static_resources:
                           route:
                             cluster: backend_service
                             timeout: 1.5s
-                    retry_policy:
-                      retry_on: 5xx
-                      num_retries: 3
-                      per_try_timeout: 3s
+                          retry_policy:
+                            retry_on: 5xx
+                            num_retries: 3
+                            per_try_timeout: 3s
                 http_filters: #Можно фильтровать по корсам, делать авторизацию и т.п. https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/http_filters#config-http-filters
                   - name: envoy.router
                     typed_config:
