@@ -28,10 +28,6 @@ static_resources:
                           route:
                             cluster: backend_service
                             timeout: 1.5s
-                          retry_policy:
-                            retry_on: 5xx
-                            num_retries: 3
-                            per_try_timeout: 3s
                 http_filters: #Можно фильтровать по корсам, делать авторизацию и т.п. https://www.envoyproxy.io/docs/envoy/latest/configuration/http/http_filters/http_filters#config-http-filters
                   - name: envoy.router
                     typed_config:
@@ -46,9 +42,7 @@ static_resources:
       type: STATIC
       lb_policy: ROUND_ROBIN #TODO customize???
       lb_subset_config:
-        fallback_policy: DEFAULT_SUBSET
-        default_subset:
-          stage: prod
+        fallback_policy: ANY_ENDPOINT
       outlier_detection:
         consecutive_5xx: 1
         interval: 10s
@@ -61,31 +55,16 @@ static_resources:
                     socket_address:
                       address: 178.128.199.176
                       port_value: 10000
-                metadata:
-                  filter_metadata:
-                    envoy.lb:
-                      version: '1.0'
-                      stage: 'prod'
               - endpoint:
                   address:
                     socket_address:
                       address: 178.128.192.170
                       port_value: 10000
-                metadata:
-                  filter_metadata:
-                    envoy.lb:
-                      version: '1.0'
-                      stage: 'prod'
               - endpoint:
                   address:
                     socket_address:
                       address: 142.93.98.176
                       port_value: 10000
-                metadata:
-                  filter_metadata:
-                    envoy.lb:
-                      version: '1.0'
-                      stage: 'prod'
 
       health_checks:
           - http_health_check:
