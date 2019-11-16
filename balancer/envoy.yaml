@@ -44,7 +44,7 @@ static_resources:
       lb_subset_config:
         fallback_policy: ANY_ENDPOINT
       outlier_detection:
-        consecutive_5xx: 1
+        consecutive_5xx: 5
         interval: 10s
       load_assignment:
         cluster_name: backend_service
@@ -65,6 +65,7 @@ static_resources:
                     socket_address:
                       address: 142.93.98.176
                       port_value: 10000
+      close_connections_on_host_health_failure: true
 
       health_checks:
           - http_health_check:
